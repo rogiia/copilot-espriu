@@ -1,0 +1,23 @@
+body {
+  margin: 0.5em;
+}
+
+main {
+  display: flex;
+  min-height: calc(100vh - 2em);
+}
+
+main div {
+  flex: 1;
+  padding: 1em;
+}
+
+#editor {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+#editor #suggestion {
+  opacity: 0.4;
+}

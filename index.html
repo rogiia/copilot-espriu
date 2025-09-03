@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Copilot Espriu</title>
+  <base href="/">
+  <meta name="viewport"
+    content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  <meta name="author" content="">
+  <meta name="application-name" content="">
+  <meta name="theme-color" content="#fff">
+  <meta name="color-scheme" content="light dark">
+  <meta property="og:title" content="" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="" />
+  <meta property="og:image" content="" />
+  <link rel="canonical" href="" />
+  <link rel="manifest" href="manifest.json">
+
+  <link rel="preload"
+    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+    as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.core.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet" />
+
+  <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/marked/lib/marked.umd.js"></script>
+
+  <style>
+    body {
+      background: #fff;
+      color: #333;
+    }
+  </style>
+  <link rel="preload" href="style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript>
+    <link rel="stylesheet" href="style.css">
+  </noscript>
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/service-worker.js');
+      });
+    }
+  </script>
+
+  <script type="module" src="./js/main.js"></script>
+
+<body>
+  <main>
+    <div>
+      <!--<div id="editor"></div>-->
+      <code contenteditable="true" id="editor"></code>
+    </div>
+    <div>
+      <div id="content"></div>
+    </div>
+  </main>
+</body>
