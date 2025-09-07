@@ -15,6 +15,12 @@ function renderSuggestion(target, suggestion) {
   suggestionEl.innerText = suggestion;
 }
 
+function getCursorOffset(selection) {
+  const currentLineText = selection.anchorNode.data;
+  const wholeText = selection.anchorNode.parentNode.innerText;
+  return wholeText.length - currentLineText.length + selection.anchorOffset;
+}
+
 function setupEditor(selector) {
   const editor = document.querySelector(selector);
   editor.innerHTML += '<span id="suggestion"></span>';
@@ -23,7 +29,7 @@ function setupEditor(selector) {
     renderMarkdown(text);
     const selection = window.getSelection();
     const cursorPosition = selection.anchorNode.parentNode === event.target ?
-      selection.anchorOffset : null;
+      getCursorOffset(selection) : null;
     const autocompleteCtx = TextParser.getAutocompleteContext(text, cursorPosition, 2);
     if (autocompleteCtx && autocompleteCtx.shouldAutocomplete) {
       renderSuggestion(event.target,
