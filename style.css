@@ -1,5 +1,5 @@
 body {
-  margin: 0.5em;
+  margin: 0;
 }
 
 main {
@@ -7,17 +7,230 @@ main {
   min-height: calc(100vh - 2em);
 }
 
-main div {
+main > div {
   flex: 1;
   padding: 1em;
+}
+main > div:first-child {
+  border-right: 2px solid #333;
 }
 
 #editor {
   width: 100%;
   height: 100%;
   display: block;
+  border: 2px solid #333;
 }
 
 #editor #suggestion {
   opacity: 0.4;
 }
+
+/* Context Panel Styles */
+#context-panel {
+  margin-bottom: 1em;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background: #f9f9f9;
+}
+
+#context-toggle {
+  width: 100%;
+  padding: 0.75em;
+  background: #f0f0f0;
+  border: none;
+  border-radius: 4px 4px 0 0;
+  cursor: pointer;
+  font-size: 1em;
+  font-weight: 500;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  transition: background-color 0.2s;
+}
+
+#context-toggle:hover {
+  background: #e0e0e0;
+}
+
+#toggle-icon {
+  font-size: 0.8em;
+  transition: transform 0.2s;
+}
+
+#toggle-icon.expanded {
+  transform: rotate(90deg);
+}
+
+#context-content {
+  padding: 1em;
+  max-height: 300px;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+}
+
+#context-content.collapsed {
+  max-height: 0;
+  padding: 0 1em;
+}
+
+.context-field {
+  margin-bottom: 0;
+  padding: 0.5em;
+}
+
+.context-field:last-child {
+  margin-bottom: 0;
+}
+
+.context-field label {
+  display: block;
+  margin-bottom: 0.25em;
+  font-weight: 500;
+  color: #333;
+}
+
+.context-field textarea {
+  width: 100%;
+  min-height: 60px;
+  padding: 0.5em;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: 0.9em;
+  resize: vertical;
+  box-sizing: border-box;
+}
+
+.context-field textarea:focus {
+  outline: none;
+  border-color: #4CAF50;
+  box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+}
+
+/* Model Configuration Panel Styles */
+#model-config-panel {
+  margin-bottom: 1em;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background: #f9f9f9;
+}
+
+#model-config-toggle {
+  width: 100%;
+  padding: 0.75em;
+  background: #f0f0f0;
+  border: none;
+  border-radius: 4px 4px 0 0;
+  cursor: pointer;
+  font-size: 1em;
+  font-weight: 500;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  transition: background-color 0.2s;
+}
+
+#model-config-toggle:hover {
+  background: #e0e0e0;
+}
+
+#model-toggle-icon {
+  font-size: 0.8em;
+  transition: transform 0.2s;
+}
+
+#model-toggle-icon.expanded {
+  transform: rotate(90deg);
+}
+
+#model-config-content {
+  padding: 1em;
+  max-height: 300px;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+}
+
+#model-config-content.collapsed {
+  max-height: 0;
+  padding: 0 1em;
+}
+
+.config-field {
+  margin-bottom: 1em;
+}
+
+.config-field:last-child {
+  margin-bottom: 0;
+}
+
+.config-field label {
+  display: block;
+  margin-bottom: 0.25em;
+  font-weight: 500;
+  color: #333;
+}
+
+.config-field input {
+  width: 100%;
+  padding: 0.5em;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: 0.9em;
+  box-sizing: border-box;
+}
+
+.config-field input:focus {
+  outline: none;
+  border-color: #2196F3;
+  box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.2);
+}
+
+.config-actions {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  margin-top: 1em;
+}
+
+#test-connection {
+  padding: 0.5em 1em;
+  background: #2196F3;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9em;
+  transition: background-color 0.2s;
+}
+
+#test-connection:hover {
+  background: #1976D2;
+}
+
+#test-connection:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+#connection-status {
+  font-size: 0.9em;
+  font-weight: 500;
+}
+
+#connection-status.success {
+  color: #4CAF50;
+}
+
+#connection-status.error {
+  color: #f44336;
+}
+
+#connection-status.testing {
+  color: #FF9800;
+}
+
+

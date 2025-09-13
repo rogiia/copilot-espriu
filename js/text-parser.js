@@ -9,8 +9,8 @@ export class TextParser {
     // If cursor is not at the end, we're editing in the middle - handle differently
     const textUpToCursor = fullText.substring(0, cursorPosition);
 
-    // Find sentence boundaries (., !, ?) followed by space or end of text
-    const sentenceEnders = /[.!?](?:\s|$)/g;
+    // Find sentence boundaries (., !, ?, line breaks) followed by space or end of text
+    const sentenceEnders = /[.!?\n](?:\s|$)/g;
 
     let lastSentenceEnd = -1;
     let match;
@@ -40,10 +40,10 @@ export class TextParser {
   }
 
   /**
-   * Check if text ends with sentence-ending punctuation
+   * Check if text ends with sentence-ending punctuation or line break
    */
   static endsWithSentencePunctuation(text) {
-    return /[.!?]\s*$/.test(text);
+    return /[.!?\n]\s*$/.test(text);
   }
 
   /**
@@ -77,7 +77,7 @@ export class TextParser {
   static getLastNSentences(text, n) {
     if (!text || n <= 0) return '';
 
-    const sentences = text.match(/[^.!?]*[.!?]/g) || [];
+    const sentences = text.match(/[^.!?\n]*[.!?\n]/g) || [];
     return sentences.slice(-n).join(' ').trim();
   }
 
@@ -105,7 +105,7 @@ export class TextParser {
     }
 
     // Stop at first sentence ending
-    const firstSentenceEnd = cleaned.match(/[.!?]/);
+    const firstSentenceEnd = cleaned.match(/[.!?\n]/);
     if (firstSentenceEnd) {
       cleaned = cleaned.substring(0, firstSentenceEnd.index + 1);
     }

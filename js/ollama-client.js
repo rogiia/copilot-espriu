@@ -1,43 +1,40 @@
-const OLLAMA_BASE_URL = 'http://localhost:11434';
+/**
+ * Get model configuration from localStorage
+ * @returns {Object} - Model configuration object
+ */
+function getModelConfig() {
+  try {
+    if (typeof Storage !== 'undefined') {
+      const saved = localStorage.getItem('copilot-espriu-model-config');
+      if (saved) {
+        return JSON.parse(saved);
+      }
+    }
+  } catch (error) {
+    console.warn('Failed to load model config:', error);
+  }
 
-function getSuggestionPrompt(currentSentence, previousText) {
-
-  return `You are a writing assistant for blog posts. Complete only the current unfinished sentence based on the context provided.
-
-Context: ${previousText}
-Current sentence to complete: ${currentSentence}
-
-Instructions:
-- Provide only the words needed to finish the current sentence
-- Match the writing tone and style from the context
-- End at the first sentence-ending punctuation (. ! ?)
-- Keep it concise and natural
-- Do not add new sentences or paragraphs
-
-Completion:`
+  return {
+    model: 'gpt-4o-mini',
+    baseUrl: 'https://api.openai.com/v1',
+    apiKey: ''
+  };
 }
 
-export async function getSuggestion(currentSentence, previousText) {
-  const url = OLLAMA_BASE_URL + '/api/generate';
-  const response = await fetch(url, {
-    method: 'POST',
-    body: JSON.stringify({
-      model: 'gemma3',
-      prompt: getSuggestionPrompt(currentSentence, previousText),
-      options: {
-        temperature: 0.7,
-        top_p: 0.9,
-        top_k: 40,
-        num_predict: 50,
-        stop: [".", "!", "?", "\n"]
-      },
-      stream: false
-    })
-  });
-  if (response.ok) {
-    const result = await response.json();
-    return result['response'];
-  } else {
-    throw new Error(`Ollama request error: ${response.status}`);
+/**
+ * Send completion request to OpenAI-compatible API
+ * @param {Object} requestBody - Original request payload (for backward compatibility)
+ * @returns {Promise<string>} - Raw response text from the model
+ */
+export async function generateCompletion(requestBody) {
+  const config = getModelConfig();
+  const prompt = requestBody.prompt;
+
+  try {
+    const { generateOpenAICompletion } = await import('./openai-client.js');
+    return await generateOpenAICompletion(prompt, config);
+  } catch (error) {
+    console.error('API completion error:', error);
+    throw error;
   }
 }

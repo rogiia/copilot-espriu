@@ -24,10 +24,7 @@
     href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
     as="style" onload="this.onload=null;this.rel='stylesheet'">
   <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.core.css" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet" />
 
-  <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/marked/lib/marked.umd.js"></script>
 
   <style>
@@ -54,6 +51,55 @@
 <body>
   <main>
     <div>
+      <div id="context-panel">
+        <button id="context-toggle" type="button">
+          <span id="toggle-icon">▶</span>
+          Writing Context
+        </button>
+        <div id="context-content" class="collapsed">
+          <div class="context-field">
+            <label for="purpose">Purpose:</label>
+            <textarea id="purpose"
+              placeholder="What is the purpose of this text? (e.g., inform, persuade, entertain)"></textarea>
+          </div>
+          <div class="context-field">
+            <label for="audience">Audience:</label>
+            <textarea id="audience"
+              placeholder="Who is your target audience? (e.g., professionals, students, general public)"></textarea>
+          </div>
+          <div class="context-field">
+            <label for="style-tone">Style & Tone:</label>
+            <textarea id="style-tone"
+              placeholder="What style and tone should be used? (e.g., formal, casual, technical, friendly)"></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div id="model-config-panel">
+        <button id="model-config-toggle" type="button">
+          <span id="model-toggle-icon">▶</span>
+          Model Configuration
+        </button>
+        <div id="model-config-content" class="collapsed">
+          <div class="config-field">
+            <label for="model-name">Model:</label>
+            <input type="text" id="model-name" placeholder="e.g., gpt-4o-mini" value="gpt-4o-mini">
+          </div>
+          <div class="config-field">
+            <label for="base-url">Base URL:</label>
+            <input type="text" id="base-url" placeholder="e.g., https://api.openai.com/v1"
+              value="https://api.openai.com/v1">
+          </div>
+          <div class="config-field">
+            <label for="api-key">API Key:</label>
+            <input type="password" id="api-key" placeholder="Your API key">
+          </div>
+          <div class="config-actions">
+            <button id="test-connection" type="button">Test Connection</button>
+            <span id="connection-status"></span>
+          </div>
+        </div>
+      </div>
       <!--<div id="editor"></div>-->
       <code contenteditable="true" id="editor"></code>
     </div>
